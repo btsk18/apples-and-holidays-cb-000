@@ -65,7 +65,7 @@ def all_supplies_in_holidays(holiday_hash)
     binding.pry
     detail_hash.each { |key, value|
       binding.pry
-      # puts "  #{key.to_s.split("_").map(:capitalize!).join(" ")}: #{value.join(", ")}"
+      puts "  #{key.to_s.split("_").map(&:capitalize).join(" ")}: #{value.join(", ")}"
     }
   }
 end
