@@ -18,31 +18,38 @@ def second_supply_for_fourth_of_july(holiday_hash)
   #   }
   # }
   # return the second element in the 4th of July array
+  holiday_supplies[:summer][:fourth_of_july][1]
 end
 
 def add_supply_to_winter_holidays(holiday_hash, supply)
   # holiday_hash is identical to the one above
   # add the second argument, which is a supply, to BOTH the
   # Christmas AND the New Year's arrays
-
+  holiday_hash.each { |key, detail_hash|
+    detail_hash.each { |key, value| value << supply } if key == :winter
+  }
 end
 
 
 def add_supply_to_memorial_day(holiday_hash, supply)
   # again, holiday_hash is the same as the ones above
   # add the second argument to the memorial day array
-
+  holiday_hash.each { |key, detail_hash|
+    detail_hash.each { |key, value| value << supply } if key == :spring
+  }
 end
 
 def add_new_holiday_with_supplies(holiday_hash, season, holiday_name, supply_array)
   # code here
   # remember to return the updated hash
-
+  holiday_hash.each { |key, detail_hash|
+    detail_hash[holiday_name] = supply_array if key == season
+  }
 end
 
 def all_winter_holiday_supplies(holiday_hash)
   # return an array of all of the supplies that are used in the winter season
-
+  holiday_hash[:winter].values.flatten
 end
 
 def all_supplies_in_holidays(holiday_hash)
@@ -53,18 +60,23 @@ def all_supplies_in_holidays(holiday_hash)
   # Summer:
   #   Fourth Of July: Fireworks, BBQ
   # etc.
-
+  holiday_hash.each { |key, detail_hash|
+    puts "#{key.capitalize}:"
+    detail_hash.each { |key, value|
+      puts "  #{key.to_s.split("_").map(&:capitalize).join(" ")}: #{value.join(", ")}"
+    }
+  }
 end
 
 def all_holidays_with_bbq(holiday_hash)
   # return an array of holiday names (as symbols) where supply lists
   # include the string "BBQ"
-
+  holidays = []
+  holiday_hash.each { |key, detail_hash|
+    puts "#{key.capitalize}:"
+    detail_hash.each { |key, value|
+      holidays << key if value.include?("BBQ")
+    }
+  }
+  holidays
 end
-
-
-
-
-
-
-
